@@ -234,6 +234,53 @@ def fig_corner(path):
 
 # ----------------------------------------------------------------------
 
+def fig_paper_panel(rows, path):
+    """The compact main-text figure: P2 feedback recovery (M2 answer) +
+    reset-cure irreversibility, side by side at \\linewidth."""
+    plt = _mpl()
+    files = sorted(glob.glob(os.path.join(
+        RUNS, "resetcure", "resetcure_a*_seed*.json")))
+    fig, (axL, axR) = plt.subplots(1, 2, figsize=(7.0, 3.0))
+    # left: P2 alpha recovery
+    a_true = np.array([r["alpha"] for r in rows])
+    a_hat = np.array([r["alpha_hat"] for r in rows])
+    xs = np.linspace(0.2, 1.0, 2)
+    axL.fill_between(xs, 0.85 * xs, 1.15 * xs, color="0.88",
+                     label=r"$\pm15\%$")
+    axL.plot(xs, xs, "k--", lw=0.8)
+    axL.scatter(a_true, a_hat, c="C0", s=22, zorder=3)
+    axL.set_xlabel(r"ground-truth $\alpha$")
+    axL.set_ylabel(r"estimated $\hat\alpha$")
+    axL.set_title("(a) estimator recovery (P2)", fontsize=9)
+    axL.legend(fontsize=7, loc="upper left")
+    # right: reset-cure
+    if files:
+        d = _load(files[0])
+        styles = {"load_reduction": ("C3", "o-", "load reduction"),
+                  "drain": ("C0", "s-", "backlog drain")}
+        t_int = None
+        for arm in d["results"]:
+            col, ls, lab = styles[arm]
+            tr = d["results"][arm]["trace"]
+            axR.plot([w["t"] for w in tr], [w["backlog"] for w in tr],
+                     ls, color=col, ms=3, label=lab)
+            for w in tr:
+                if w.get("intervention"):
+                    t_int = w["t"]
+        if t_int is not None:
+            axR.axvline(t_int, color="0.6", ls=":", lw=1)
+        axR.set_yscale("symlog")
+        axR.set_xlabel("time")
+        axR.set_ylabel("backlog")
+        axR.set_title(rf"(b) reset-cure ($\alpha={d['alpha']}\geq1$)",
+                      fontsize=9)
+        axR.legend(fontsize=7, loc="center right")
+    fig.tight_layout()
+    fig.savefig(path, dpi=200)
+    fig.savefig(path[:-4] + ".pdf")
+    return path
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     out = {}
@@ -248,6 +295,7 @@ def main():
                                     for r in rows))
     fig_recovery(rows, os.path.join(OUT, "p2_recovery.png"))
     fig_srcal(cal, os.path.join(OUT, "src_calibration.png"))
+    fig_paper_panel(rows, os.path.join(OUT, "tier2_validation.png"))
     # SR_c estimate: the SR where the escape fraction first exceeds 1/2
     lucid = [c for c in cal if c["esc_frac"] < 0.5]
     coll = [c for c in cal if c["esc_frac"] >= 0.5]

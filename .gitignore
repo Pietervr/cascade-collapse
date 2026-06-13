@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Generated figures (regenerate with the seeded commands; see docs/FIGURES.md)
+sr_rigor_fix/figures/
+derivation/figures/
+paper_figures/
+
+# Simulation result caches
+derivation/*.npz
+sr_rigor_fix/*.npz
+
+# Tier-2 validation runtime artifacts
+validation/.llm_cache/
+validation/runs/
+# but keep the committed summary tables + figures if you choose to archive them
+!validation/runs/*.out
+
+# OS / editor
+.DS_Store

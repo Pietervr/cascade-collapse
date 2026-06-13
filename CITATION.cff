@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "cascade-collapse: simulation and validation code for First-Order Recoverability Collapse in Self-Referential Information Decoders"
+authors:
+  - family-names: "van Rooyen"
+    given-names: "Pieter"
+    affiliation: "University of Stellenbosch, Department of Electrical & Electronic Engineering"
+license: MIT
+repository-code: "https://github.com/pietervr/cascade-collapse"
+preferred-citation:
+  type: article
+  title: "First-Order Recoverability Collapse in Self-Referential Information Decoders"
+  authors:
+    - family-names: "van Rooyen"
+      given-names: "Pieter"
+      affiliation: "University of Stellenbosch, Department of Electrical & Electronic Engineering"
+  year: 2026
+  # journal / DOI / arXiv id added on submission

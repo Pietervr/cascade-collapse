@@ -1,0 +1,15 @@
+# cascade-collapse — reproduction environment
+# Pure scientific-Python stack; no scipy, no ML frameworks.
+# Tested on CPython 3.9 (the development venv).
+numpy>=1.24
+matplotlib>=3.7
+
+# The Tier-2 validation pipeline (validation/) drives a local LLM through an
+# HTTP API using only the standard library (urllib). No client SDK is
+# required. To reproduce the live runs you additionally need a running model
+# server:
+#   - Ollama (https://ollama.com) for the local sweep backend, e.g.
+#       ollama pull llama3.1:8b
+#   - or an Anthropic API key in ANTHROPIC_API_KEY for the frontier spot-check.
+# The Mock backend needs neither and reproduces all *structural* results
+# (the estimator-recovery test runs fully offline).

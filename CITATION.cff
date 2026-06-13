@@ -6,7 +6,7 @@ authors:
     given-names: "Pieter"
     affiliation: "University of Stellenbosch, Department of Electrical & Electronic Engineering"
 license: MIT
-repository-code: "https://github.com/pietervr/cascade-collapse"
+repository-code: "https://github.com/Pietervr/cascade-collapse"
 preferred-citation:
   type: article
   title: "First-Order Recoverability Collapse in Self-Referential Information Decoders"

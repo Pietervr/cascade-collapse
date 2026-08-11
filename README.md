@@ -37,6 +37,7 @@ irreversible "reset-cure" regime above α = 1.
 | N-scaling: fleet limit sharpens the transition (SM) | `sr_rigor_fix/cascade_sim.py` (`nscaling`) |
 | **Empirical validation (Tier 2):** controlled LLM pipeline where (α, ℓ₀) are ground truth; the shared estimator recovers them | `validation/` |
 | **Empirical validation (Tier 1):** the same estimator on an observational corpus | `validation/` (corpus adapters; see protocol) |
+| **The decisive experiment (Sec. IV E):** real-workload closed-loop pipeline — wall-clock deadlines, empirically calibrated non-exponential service, real-time deadline feedback — measuring the collapse point, the hysteresis loop, cascade statistics, and the cusp scan | `experiment/pipeline_rig.py` (+ `experiment/make_experiment_figure.py`) |
 
 The exact command for each paper figure is in [`docs/FIGURES.md`](docs/FIGURES.md).
 
@@ -52,6 +53,10 @@ sr_rigor_fix/           the closed-loop simulator (the theory engine)
 derivation/             the two derivation-note simulations
   sr_simulation.py        M/M/1 SR(ρ) closed form + τ_relax critical slowing
   ising_spin_dissipation.py  driven two-level system: positive, BOUNDED EP
+experiment/             the real-workload pipeline experiment (paper Sec. IV E):
+  pipeline_rig.py         calibrate | hysteresis | cascades | cusp protocols
+  make_experiment_figure.py  the 3-panel measurement figure
+  results/                measured JSON (calibration, ramps, cascades, cusp)
 validation/             the two-tier empirical-validation pipeline
   MEASUREMENT_PROTOCOL.md  the pre-registered measurement protocol (frozen)
   llm_backend.py          one generate() over Ollama / Anthropic / Mock

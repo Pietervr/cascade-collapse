@@ -1,0 +1,79 @@
+{
+  "alpha": 0.5,
+  "theta": 5.0,
+  "q": 0.0,
+  "mu_hat": 1354.2887503156494,
+  "dwell": 1.5,
+  "rows": [
+    {
+      "l0": 0.05,
+      "direction": "up",
+      "x": 0.0592,
+      "P_u": 0.4286,
+      "SR": 0.75,
+      "backlog": 0,
+      "served": 119,
+      "elapsed": 1.4853
+    },
+    {
+      "l0": 0.1667,
+      "direction": "up",
+      "x": 0.1737,
+      "P_u": 0.0538,
+      "SR": 0.0569,
+      "backlog": 1,
+      "served": 353,
+      "elapsed": 1.5002
+    },
+    {
+      "l0": 0.2833,
+      "direction": "up",
+      "x": 0.2934,
+      "P_u": 0.0101,
+      "SR": 0.0102,
+      "backlog": 0,
+      "served": 595,
+      "elapsed": 1.4976
+    },
+    {
+      "l0": 0.4,
+      "direction": "up",
+      "x": 0.4089,
+      "P_u": 0.0036,
+      "SR": 0.0036,
+      "backlog": 0,
+      "served": 830,
+      "elapsed": 1.4988
+    },
+    {
+      "l0": 0.2833,
+      "direction": "down",
+      "x": 0.2777,
+      "P_u": 0.0018,
+      "SR": 0.0018,
+      "backlog": 0,
+      "served": 564,
+      "elapsed": 1.4995
+    },
+    {
+      "l0": 0.1667,
+      "direction": "down",
+      "x": 0.1659,
+      "P_u": 0.0475,
+      "SR": 0.0498,
+      "backlog": 0,
+      "served": 337,
+      "elapsed": 1.4996
+    },
+    {
+      "l0": 0.05,
+      "direction": "down",
+      "x": 0.0631,
+      "P_u": 0.3438,
+      "SR": 0.5238,
+      "backlog": 0,
+      "served": 128,
+      "elapsed": 1.497
+    }
+  ]
+}

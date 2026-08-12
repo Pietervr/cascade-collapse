@@ -474,8 +474,8 @@ def cmd_hysteresis(args):
 
     n = len(grid_up)
     fig, ax = plt.subplots(figsize=(4.9, 3.55))
-    ax.plot(grid[:n], xs[:n], "o-", ms=3, label="ramp up")
-    ax.plot(grid[n:], xs[n:], "s-", ms=3, label="ramp down")
+    ax.plot(grid[:n], xs[:n], "o-", ms=3, color="#1F4E79", label="ramp up")
+    ax.plot(grid[n:], xs[n:], "s-", ms=3, color="#E07B00", label="ramp down")
     # mean-field lucid branch
     ll = np.linspace(1e-3, fp[1], 200)
     ax.plot(ll, [lucid_x(v, alpha, theta) for v in ll], "k-", lw=1,
@@ -483,13 +483,14 @@ def cmd_hysteresis(args):
     coll = np.linspace(l0_rec, max(grid), 100)
     ax.plot(coll, coll / (1.0 - alpha), "k--", lw=1,
             label=r"collapsed $x=\ell_0/(1{-}\alpha)$")
-    ax.axvline(fp[1], color="r", ls=":", lw=1)
-    ax.axvline(l0_rec, color="b", ls=":", lw=1)
+    ax.axvline(fp[1], color="#C00000", ls=":", lw=1)
+    ax.axvline(l0_rec, color="#1F4E79", ls=":", lw=1)
     ax.set_xlabel(r"$\ell_0$")
     ax.set_ylabel(r"$x=\lambda_{\rm eff}/\mu$")
     ax.set_title(rf"(B) hysteresis ($\alpha={alpha}$, $\theta={theta:g}$)",
                  fontsize=9.5, loc="left")
     ax.legend(fontsize=7, frameon=True, framealpha=0.9, edgecolor="none")
+    ax.grid(alpha=0.25)
     out = os.path.join(_figdir(), "hysteresis.png")
     fig.tight_layout()
     fig.savefig(out, dpi=160)
@@ -713,8 +714,9 @@ def cmd_avfit(args):
         a, l0, th = (float(v) for v in chunk.split(":"))
         pts.append((a, l0, th))
     fig, ax = plt.subplots(figsize=(4.9, 3.55))
+    palette = ["#1F4E79", "#E07B00", "#2E7D32"]
     rows = []
-    for (alpha, l0, theta) in pts:
+    for ip, (alpha, l0, theta) in enumerate(pts):
         sim = CascadeSim(alpha=alpha, l0=l0, dt=theta, seed=args.seed)
         sim.run(t_max=args.t_max, max_events=40_000_000,
                 collapse_backlog=3000)
@@ -740,7 +742,8 @@ def cmd_avfit(args):
         pdf = hist / (widths * sizes.size)
         m = pdf > 0
         ax.loglog(centers[m] / sc_pred, pdf[m] * centers[m] ** 1.5, "o",
-                  ms=3, label=rf"$\alpha={alpha},\ \ell_0={l0},"
+                  ms=3, color=palette[ip % 3],
+                  label=rf"$\alpha={alpha},\ \ell_0={l0},"
                   rf"\ \theta={theta}$")
     xx = np.logspace(-2.5, 0.8, 60)
     ax.loglog(xx, 0.35 * np.exp(-xx), "k--", lw=1,
@@ -749,6 +752,7 @@ def cmd_avfit(args):
     ax.set_ylabel(r"$P(s)\,s^{3/2}$")
     ax.set_title("(A) cutoff-scaling collapse", fontsize=9.5, loc="left")
     ax.legend(fontsize=6, frameon=True, framealpha=0.9, edgecolor="none")
+    ax.grid(alpha=0.25, which="both")
     out = os.path.join(_figdir(), "avfit.png")
     fig.tight_layout()
     fig.savefig(out, dpi=160)

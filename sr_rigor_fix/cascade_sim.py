@@ -473,7 +473,7 @@ def cmd_hysteresis(args):
               f"backlog={sim.waiting()}")
 
     n = len(grid_up)
-    fig, ax = plt.subplots(figsize=(5.2, 3.6))
+    fig, ax = plt.subplots(figsize=(4.9, 3.55))
     ax.plot(grid[:n], xs[:n], "o-", ms=3, label="ramp up")
     ax.plot(grid[n:], xs[n:], "s-", ms=3, label="ramp down")
     # mean-field lucid branch
@@ -487,7 +487,8 @@ def cmd_hysteresis(args):
     ax.axvline(l0_rec, color="b", ls=":", lw=1)
     ax.set_xlabel(r"$\ell_0$")
     ax.set_ylabel(r"$x=\lambda_{\rm eff}/\mu$")
-    ax.set_title(rf"hysteresis: $\alpha={alpha}$, $\theta={theta}$")
+    ax.set_title(rf"(B) hysteresis ($\alpha={alpha}$, $\theta={theta:g}$)",
+                 fontsize=9.5, loc="left")
     ax.legend(fontsize=7)
     out = os.path.join(_figdir(), "hysteresis.png")
     fig.tight_layout()
@@ -711,7 +712,7 @@ def cmd_avfit(args):
     for chunk in args.points.split(","):
         a, l0, th = (float(v) for v in chunk.split(":"))
         pts.append((a, l0, th))
-    fig, ax = plt.subplots(figsize=(5.0, 3.7))
+    fig, ax = plt.subplots(figsize=(4.9, 3.55))
     rows = []
     for (alpha, l0, theta) in pts:
         sim = CascadeSim(alpha=alpha, l0=l0, dt=theta, seed=args.seed)
@@ -746,7 +747,7 @@ def cmd_avfit(args):
               label=r"$\propto e^{-s/s_c}$")
     ax.set_xlabel(r"$s/s_c^{\rm pred}$, $s_c^{\rm pred}=2/(1-b_{\rm eff})^2$")
     ax.set_ylabel(r"$P(s)\,s^{3/2}$")
-    ax.set_title("cutoff-scaling collapse")
+    ax.set_title("(A) cutoff-scaling collapse", fontsize=9.5, loc="left")
     ax.legend(fontsize=6)
     out = os.path.join(_figdir(), "avfit.png")
     fig.tight_layout()

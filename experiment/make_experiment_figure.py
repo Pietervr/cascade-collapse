@@ -73,6 +73,16 @@ def panel_a(ax) -> dict:
             label="up-ramp (measured)")
     ax.plot(*zip(*dn), "s-", color=ORANGE, ms=4, lw=1.2,
             label="down-ramp (measured)")
+    # first-collapse points of the seeded ensemble (b3), stacked ticks
+    b3 = json.loads((RES / "b3_ensemble.json").read_text())
+    fcs = [r["first_collapsed"] for r in b3["collapse_ensemble"]["runs"]
+           if r["first_collapsed"]]
+    stack: dict = {}
+    for v in sorted(fcs):
+        k = stack.get(v, 0)
+        ax.plot([v], [1.045 + 0.028 * k], "v", color=BLUE, ms=4,
+                alpha=0.8, zorder=6)
+        stack[v] = k + 1
     ax.set_xlabel(r"exogenous load $\ell_0$")
     ax.set_ylabel(r"effective load $x$")
     ax.set_title(f"(A) measured hysteresis "
@@ -80,7 +90,7 @@ def panel_a(ax) -> dict:
                  loc="left")
     ax.legend(fontsize=6.6, loc="lower right", frameon=True,
               framealpha=0.9, edgecolor="none", borderaxespad=0.3)
-    ax.set_ylim(0, 1.12)
+    ax.set_ylim(0, 1.17)
     ax.grid(alpha=0.25)
     return dict(l0c=l0c, xf=xf)
 
@@ -120,8 +130,19 @@ def panel_c(ax) -> dict:
     astar = d["alpha_star"]
     alphas = [r["alpha"] for r in d["runs"]]
     jumps = [r["max_jump"] for r in d["runs"]]
-    ax.plot(alphas, jumps, "o-", color=BLUE, ms=5, lw=1.4,
-            label="max single-step jump in $x$")
+    ax.plot(alphas, jumps, "s--", color="0.62", ms=3, lw=1.0,
+            label="single scan")
+    b3 = json.loads((RES / "b3_ensemble.json").read_text())
+    summ = b3["cusp_repeats"]["summary"]
+    al = [float(a) for a in b3["cusp_repeats"]["alphas"]]
+    means = [summ[str(a)]["mean"] for a in b3["cusp_repeats"]["alphas"]]
+    lo = [summ[str(a)]["lo"] for a in b3["cusp_repeats"]["alphas"]]
+    hi = [summ[str(a)]["hi"] for a in b3["cusp_repeats"]["alphas"]]
+    yerr = [[m - l for m, l in zip(means, lo)],
+            [h - m for m, h in zip(means, hi)]]
+    ax.errorbar(al, means, yerr=yerr, fmt="o-", color=BLUE, ms=5,
+                lw=1.4, capsize=3,
+                label="mean of 3 seeded scans (min--max)")
     ax.axvline(astar, color=RED, ls=":", lw=1.4)
     ax.text(astar + 0.01, max(jumps) * 0.55,
             rf"$\alpha^*=1/(1+\theta)={astar:.2f}$", rotation=90,

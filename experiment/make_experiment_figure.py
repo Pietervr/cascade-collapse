@@ -59,8 +59,13 @@ def panel_a(ax) -> dict:
     ax.plot(l0g, np.minimum(1.0, l0g / (1 - a)), "k--", lw=1.2,
             label="collapsed branch (capped)")
     ax.axvline(l0c, color=RED, ls=":", lw=1.4)
-    ax.text(l0c - 0.012, 0.44, r"$\ell_0^{c}$ (mean field)", rotation=90,
+    ax.text(l0c - 0.012, 0.44, r"$\ell_0^{c}$ (M/M/1)", rotation=90,
             fontsize=7.0, color=RED, ha="right", va="bottom")
+    emp = json.loads((RES / "empirical_fold.json").read_text())
+    l0c_emp = emp["empirical"]["fold"]
+    ax.axvline(l0c_emp, color="#7A0000", ls="--", lw=1.4)
+    ax.text(l0c_emp + 0.008, 0.30, r"$\ell_{0,\rm emp}^{c}$ (empirical service)",
+            rotation=90, fontsize=7.0, color="#7A0000", va="bottom")
     ax.axvline(1 - a, color=BLUE, ls=":", lw=1.4)
     ax.text(1 - a + 0.008, 0.60, r"recovery $\ell_0=1-\alpha$", rotation=90,
             fontsize=7.0, color=BLUE, va="bottom")

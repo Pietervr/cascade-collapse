@@ -54,25 +54,27 @@ def panel_a(ax) -> dict:
     dn = [(r["l0"], r["x"]) for r in d["rows"] if r["direction"] == "down"]
     xf, l0c = fold_point(a, th)
     l0s, xs = lucid_branch(a, th, xf)
-    ax.plot(l0s, xs, "k-", lw=1.6, label="mean-field lucid branch")
+    ax.plot(l0s, xs, "k-", lw=1.6, label="mean-field lucid")
     l0g = np.linspace(0.01, 0.85, 100)
     ax.plot(l0g, np.minimum(1.0, l0g / (1 - a)), "k--", lw=1.2,
-            label=r"collapsed $x=\ell_0/(1-\alpha)$ (capped)")
+            label="collapsed branch (capped)")
     ax.axvline(l0c, color=RED, ls=":", lw=1.4)
-    ax.text(l0c + 0.008, 0.18, r"$\ell_0^{c}$ (mean field)", rotation=90,
-            fontsize=7.5, color=RED)
+    ax.text(l0c - 0.012, 0.44, r"$\ell_0^{c}$ (mean field)", rotation=90,
+            fontsize=7.0, color=RED, ha="right", va="bottom")
     ax.axvline(1 - a, color=BLUE, ls=":", lw=1.4)
-    ax.text(1 - a + 0.008, 0.18, r"recovery $\ell_0=1-\alpha$", rotation=90,
-            fontsize=7.5, color=BLUE)
-    ax.plot(*zip(*up), "o-", color=BLUE, ms=4, lw=1.2, label="measured, ramp up")
+    ax.text(1 - a + 0.008, 0.60, r"recovery $\ell_0=1-\alpha$", rotation=90,
+            fontsize=7.0, color=BLUE, va="bottom")
+    ax.plot(*zip(*up), "o-", color=BLUE, ms=4, lw=1.2,
+            label="up-ramp (measured)")
     ax.plot(*zip(*dn), "s-", color=ORANGE, ms=4, lw=1.2,
-            label="measured, ramp down")
+            label="down-ramp (measured)")
     ax.set_xlabel(r"exogenous load $\ell_0$")
     ax.set_ylabel(r"effective load $x$")
     ax.set_title(f"(A) measured hysteresis "
                  rf"($\alpha={a}$, $\theta={th:.0f}$)", fontsize=9.5,
                  loc="left")
-    ax.legend(fontsize=6.8, loc="upper left", frameon=False)
+    ax.legend(fontsize=6.6, loc="lower right", frameon=True,
+              framealpha=0.9, edgecolor="none", borderaxespad=0.3)
     ax.set_ylim(0, 1.12)
     ax.grid(alpha=0.25)
     return dict(l0c=l0c, xf=xf)

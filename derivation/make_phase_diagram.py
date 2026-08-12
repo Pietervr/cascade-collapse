@@ -66,13 +66,14 @@ def panel_a(ax) -> None:
             # unstable middle branch (parametric continuation to x=1)
             xu = np.linspace(xf, 1.0, 200)
             ax.plot(l0_of_x(xu, alpha), xu, "--", color=color, lw=1.2)
-            # collapsed branch: x = 1 (capacity-capped) for l0 >= 1-alpha
-            ax.plot([rec, 0.85], [1.0, 1.0], "-", color=color, lw=1.8)
+            # collapsed branch: fluid balance x = l0/(1-alpha), l0 >= 1-alpha
+            lc = np.linspace(rec, 0.85, 100)
+            ax.plot(lc, lc / (1 - alpha), "-", color=color, lw=1.8)
             # hysteresis jumps (down-jump lands on the lucid root at rec)
             xr = 0.5
             for _ in range(200):
                 xr = rec + alpha * xr * np.exp(-(1 - xr) * THETA)
-            ax.annotate("", xy=(l0c, 1.0), xytext=(l0c, xf),
+            ax.annotate("", xy=(l0c, l0c / (1 - alpha)), xytext=(l0c, xf),
                         arrowprops=dict(arrowstyle="->", color=color,
                                         lw=1.1, ls=":"))
             ax.annotate("", xy=(rec, xr), xytext=(rec, 1.0),
@@ -81,8 +82,8 @@ def panel_a(ax) -> None:
             ax.plot([l0c], [xf], "o", color=color, ms=5)
             ax.plot([rec], [1.0], "s", color=color, ms=5)
     ax.set_xlim(0, 0.88)
-    ax.set_ylim(0, 1.1)
-    ax.set_xlabel(r"exogenous load $\ell_0$")
+    ax.set_ylim(0, 1.18)
+    ax.set_xlabel(r"grounding $\ell_0$")
     ax.set_ylabel(r"effective load $x$")
     ax.set_title(rf"(A) response of Eq. (9) at $\theta={THETA:.0f}$"
                  rf"  ($\alpha^*={1/(1+THETA):.1f}$)", fontsize=9.5,

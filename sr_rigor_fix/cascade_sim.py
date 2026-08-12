@@ -489,7 +489,7 @@ def cmd_hysteresis(args):
     ax.set_ylabel(r"$x=\lambda_{\rm eff}/\mu$")
     ax.set_title(rf"(B) hysteresis ($\alpha={alpha}$, $\theta={theta:g}$)",
                  fontsize=9.5, loc="left")
-    ax.legend(fontsize=7)
+    ax.legend(fontsize=7, frameon=True, framealpha=0.9, edgecolor="none")
     out = os.path.join(_figdir(), "hysteresis.png")
     fig.tight_layout()
     fig.savefig(out, dpi=160)
@@ -748,7 +748,7 @@ def cmd_avfit(args):
     ax.set_xlabel(r"$s/s_c^{\rm pred}$, $s_c^{\rm pred}=2/(1-b_{\rm eff})^2$")
     ax.set_ylabel(r"$P(s)\,s^{3/2}$")
     ax.set_title("(A) cutoff-scaling collapse", fontsize=9.5, loc="left")
-    ax.legend(fontsize=6)
+    ax.legend(fontsize=6, frameon=True, framealpha=0.9, edgecolor="none")
     out = os.path.join(_figdir(), "avfit.png")
     fig.tight_layout()
     fig.savefig(out, dpi=160)

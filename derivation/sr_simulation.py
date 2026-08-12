@@ -182,7 +182,7 @@ def main():
     axA.set_ylabel(r"stability ratio  $\mathrm{SR}=\dot S_i/\dot S_e$")
     axA.set_title("(A)  closed form vs. simulation", fontsize=11)
     axA.set_xlim(0.4, 1.02)
-    axA.legend(fontsize=8.5, loc="upper left", framealpha=0.95)
+    axA.legend(fontsize=8.5, loc="upper left", framealpha=0.95, edgecolor="none")
     axA.grid(True, which="both", alpha=0.18)
 
     # Panel B: tau vs (1-CR), log-log
@@ -200,7 +200,7 @@ def main():
     axB.set_xlabel(r"distance to boundary  $1-\mathrm{CR}$")
     axB.set_ylabel(r"autocorrelation time  $\tau_{\mathrm{relax}}$")
     axB.set_title("(B)  critical slowing down at $\\Gamma$", fontsize=11)
-    axB.legend(fontsize=8.5, loc="upper right", framealpha=0.95)
+    axB.legend(fontsize=8.5, loc="upper right", framealpha=0.95, edgecolor="none")
     axB.grid(True, which="both", alpha=0.18)
 
     fig.tight_layout()

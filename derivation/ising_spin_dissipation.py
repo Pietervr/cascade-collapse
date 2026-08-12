@@ -151,7 +151,7 @@ def main():
     axA.set_xlabel(r"field  $\beta h(t)$")
     axA.set_ylabel(r"magnetization  $m=\langle s\rangle$")
     axA.set_title("(A)  hysteresis: loop area $=$ dissipated work", fontsize=11)
-    axA.legend(fontsize=8.3, loc="upper left", framealpha=0.95)
+    axA.legend(fontsize=8.3, loc="upper left", framealpha=0.95, edgecolor="none")
     axA.grid(True, alpha=0.18)
 
     # Panel B: EP rate vs drive rate -- bounded
@@ -172,7 +172,7 @@ def main():
                    r"  $(k_B/\tau_0)$")
     axB.set_title(r"(B)  positive but bounded dissipation", fontsize=11)
     axB.set_ylim(0, peak * 1.25)
-    axB.legend(fontsize=8.5, loc="upper right", framealpha=0.95)
+    axB.legend(fontsize=8.5, loc="upper right", framealpha=0.95, edgecolor="none")
     axB.grid(True, which="both", alpha=0.18)
 
     fig.tight_layout()

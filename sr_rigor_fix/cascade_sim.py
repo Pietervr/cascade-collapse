@@ -339,6 +339,9 @@ def _mpl():
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
+    # CM/usetex: match the manuscript body font (paper figures)
+    plt.rcParams.update({"text.usetex": True, "font.family": "serif",
+                         "text.latex.preamble": r"\usepackage{amsmath}"})
     style = os.path.join(os.path.dirname(__file__), "..", "styles",
                          "pre.mplstyle")
     if os.path.exists(style):

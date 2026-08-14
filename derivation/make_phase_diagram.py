@@ -21,6 +21,9 @@ from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+# CM/usetex: match the manuscript body font (paper figures)
+plt.rcParams.update({"text.usetex": True, "font.family": "serif",
+                     "text.latex.preamble": r"\usepackage{amsmath}"})
 import numpy as np
 
 HERE = Path(__file__).resolve().parent

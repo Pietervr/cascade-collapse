@@ -31,6 +31,9 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+# CM/usetex: match the manuscript body font (paper figures)
+plt.rcParams.update({"text.usetex": True, "font.family": "serif",
+                     "text.latex.preamble": r"\usepackage{amsmath}"})
 
 CACHE = "sr_simulation_results.npz"   # set env REPLOT=1 to skip sim and re-plot
 

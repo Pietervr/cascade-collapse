@@ -131,10 +131,16 @@ def panel_b(ax) -> None:
     ax.text(0.16, 0.22, "LUCID", fontsize=9, color=BLUE, weight="bold")
     ax.text(0.30, 0.78, "COLLAPSED", fontsize=9,
             color="#7A0000", weight="bold", zorder=6)
-    ax.text(0.71, 0.255, "bistable", fontsize=8, color=ORANGE,
-            rotation=-33)
-    ax.text(1.02, 0.08, "reset-only\n" r"($\alpha\geq1$)", fontsize=7.5,
-            color="0.25")
+    # "bistable" centered mid-wedge (between the two spinodals) so it
+    # clears both lines; "reset-only" kept below the collapse spinodal
+    # and right of the alpha=1 marker.
+    a_lab = 0.80
+    l0c_lab = l0_of_x(np.array([fold_x(a_lab)]), a_lab)[0]
+    ax.text(a_lab, 0.5 * ((1 - a_lab) + l0c_lab), "bistable",
+            fontsize=7.5, color=ORANGE, rotation=-33,
+            ha="center", va="center")
+    ax.text(1.05, 0.025, "reset-only\n" r"($\alpha\geq1$)", fontsize=7.5,
+            color="0.25", va="bottom")
     ax.text(0.03, 0.885, r"$\alpha\to0$: open-loop $\mathrm{CR}=1$",
             fontsize=7, color="0.35", va="top", rotation=-38)
 

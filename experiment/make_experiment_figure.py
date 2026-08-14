@@ -145,7 +145,7 @@ def panel_c(ax) -> dict:
             [h - m for m, h in zip(means, hi)]]
     ax.errorbar(al, means, yerr=yerr, fmt="o-", color=BLUE, ms=5,
                 lw=1.4, capsize=3,
-                label="mean of 3 seeded scans (min--max)")
+                label="mean of 3\nseeded scans\n(min--max)")
     ax.axvline(astar, color=RED, ls=":", lw=1.4)
     ax.text(astar + 0.01, max(jumps) * 0.55,
             rf"$\alpha^*=1/(1+\theta)={astar:.2f}$", rotation=90,

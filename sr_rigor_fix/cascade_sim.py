@@ -872,7 +872,8 @@ def cmd_nscaling(args):
     for n, m, c in zip(ns, meds, cens):
         if c > 0:
             ax.annotate(f"{c}/{args.seeds} cens.", (n, m), fontsize=6,
-                        textcoords="offset points", xytext=(4, 4))
+                        ha="right", va="top",
+                        textcoords="offset points", xytext=(-6, -6))
     ax.axhline(args.t_max, color="gray", ls=":", lw=1)
     ax.set_yscale("log")
     ax.set_xlabel(r"system size $N$ (parallel decoders)")

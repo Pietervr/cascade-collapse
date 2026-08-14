@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Quantitative closed-loop phase-structure figure (paper Fig. 2).
 
-(A) Response curves x(l0) from Eq. (10), x = l0 + alpha*x*exp(-(1-x)*theta),
+(A) Response curves x(l0) from the closure equation, x = l0 + alpha*x*exp(-(1-x)*theta),
     at theta=1 for alpha below and above the cusp alpha* = 1/(1+theta):
     the continuous response and the S-curve with fold, unstable branch,
     capped collapsed branch, and the hysteresis jumps.
 (B) The (alpha, l0) phase diagram at theta=1, computed (not schematic):
-    collapse spinodal l0^c(alpha) [Eq. (11)], recovery spinodal
+    collapse spinodal l0^c(alpha), recovery spinodal
     l0 = 1-alpha, continuous boundary below the cusp, the cusp point,
     shaded LUCID / BISTABLE / COLLAPSED regions, and the reset-only
     regime alpha >= 1.
@@ -88,7 +88,7 @@ def panel_a(ax) -> None:
     ax.set_ylim(0, 1.18)
     ax.set_xlabel(r"grounding $\ell_0$")
     ax.set_ylabel(r"effective load $x$")
-    ax.set_title(rf"(A) response of Eq. (10) at $\theta={THETA:.0f}$"
+    ax.set_title(rf"(A) response $x(\ell_0)$ at $\theta={THETA:.0f}$"
                  rf"  ($\alpha^*={1/(1+THETA):.1f}$)", fontsize=9.5,
                  loc="left")
     ax.legend(fontsize=7.2, loc="lower right", frameon=True,
@@ -119,7 +119,7 @@ def panel_b(ax) -> None:
     ax.plot(a_cont, 1 - a_cont, "-.", color="k", lw=1.4,
             label=r"continuous boundary $\ell_0=1-\alpha$")
     ax.plot(al, l0c, "-", color=RED, lw=1.8,
-            label=r"collapse spinodal $\ell_0^{c}(\alpha)$, Eq. (11)")
+            label=r"collapse spinodal $\ell_0^{c}(\alpha)$")
     ax.plot(a_rec, 1 - a_rec, "--", color=BLUE, lw=1.8,
             label=r"recovery spinodal $\ell_0=1-\alpha$")
     ax.plot([astar], [l0star], "ko", ms=6)

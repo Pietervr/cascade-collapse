@@ -182,7 +182,9 @@ def main():
     axA.text(0.997, axA.get_ylim()[0] * 1.5, r"$\Gamma$", color="#C00000",
              ha="right", va="bottom", fontsize=13)
     axA.set_xlabel(r"capacity ratio  $\mathrm{CR}=R_{\mathrm{self}}/C_{\mathrm{self}}$")
-    axA.set_ylabel(r"stability ratio  $\mathrm{SR}=\dot S_i/\dot S_e$")
+    axA.set_ylabel(
+        r"stability ratio  "
+        r"$\mathrm{SR}=\dot N_{\mathrm{uncert}}/\dot N_{\mathrm{cert}}$")
     axA.set_title("(A)  closed form vs. simulation", fontsize=11)
     axA.set_xlim(0.4, 1.02)
     axA.legend(fontsize=8.5, loc="upper left", framealpha=0.95, edgecolor="none")

@@ -94,13 +94,13 @@ ax.add_patch(patches.FancyBboxPatch((0.7, 6.0), 8.6, 2.6,
 ax.text(0.22, 7.3, r"\textsc{star}", rotation=90, va="center",
         ha="center", fontsize=9, color="0.2")
 # col 1: the radiative bulk -- layered interior (aspect-corrected circle)
-for w, h, fc in ((1.36, 1.80, "#F8E3B0"), (0.87, 1.15, "#F3CF7E"),
-                 (0.42, 0.55, "#EDB84F")):
-    ax.add_patch(patches.Ellipse((1.9, 7.52), w, h, facecolor=fc,
+for w, h, fc in ((1.24, 1.60, "#F8E3B0"), (0.79, 1.02, "#F3CF7E"),
+                 (0.38, 0.49, "#EDB84F")):
+    ax.add_patch(patches.Ellipse((1.9, 7.68), w, h, facecolor=fc,
                                  edgecolor="0.3" if w > 1.4 else "none",
                                  lw=1.2))
 # col 2: convection rolls (granulation cells)
-for i, cx in enumerate((4.42, 5.0, 5.58)):
+for i, cx in enumerate((4.32, 5.0, 5.68)):
     t1, t2 = (25, 335) if i % 2 == 0 else (205, 155)
     ax.add_patch(patches.Arc((cx, 7.52), 0.5, 0.72, theta1=t1, theta2=t2,
                              color=RED, lw=1.4))
@@ -111,16 +111,18 @@ for i, cx in enumerate((4.42, 5.0, 5.58)):
                 arrowprops=dict(arrowstyle="->", color=RED, lw=1.3))
 # col 3: none
 ax.text(8.1, 7.62, r"---", ha="center", fontsize=9, color="0.5")
-ax.text(8.1, 7.28, r"(no trajectory-carried component)", ha="center",
-        fontsize=6.4, color=GRAY)
+ax.text(8.1, 7.28, r"(no trajectory-carried state)", ha="center",
+        fontsize=6.2, color=GRAY)
 # labels
-ax.text(1.9, 6.48, r"radiative bulk$^{\dagger}$ (near-LTE)",
-        ha="center", fontsize=7.4, color=BLUE)
-ax.text(1.9, 6.22, r"$^{\dagger}$non-dissipative role, not an archive",
+ax.text(1.9, 6.55, r"radiative bulk$^{\dagger}$ (near-LTE)",
+        ha="center", fontsize=7.2, color=BLUE)
+ax.text(1.9, 6.31, r"$^{\dagger}$non-dissipative role,",
         ha="center", fontsize=6.2, color=GRAY, style="italic")
-ax.text(5.0, 6.48, r"convection zone / granulation", ha="center",
-        fontsize=7.4, color=RED)
-ax.text(5.0, 6.22, r"(sustained by heat flux)", ha="center", fontsize=6.4,
+ax.text(1.9, 6.10, r"not an archive",
+        ha="center", fontsize=6.2, color=GRAY, style="italic")
+ax.text(5.0, 6.55, r"convection zone / granulation", ha="center",
+        fontsize=7.2, color=RED)
+ax.text(5.0, 6.30, r"(sustained by heat flux)", ha="center", fontsize=6.4,
         color=GRAY)
 
 # ---------------- arrows star <-> AI ----------------
@@ -165,14 +167,17 @@ for k in range(4):
                                    1.7, 0.22, facecolor="#E9F0E9",
                                    edgecolor=GREEN, lw=1.0))
 ax.text(8.03, 4.19, r"?", fontsize=7, color=GREEN, ha="center", va="center")
-ax.text(1.9, 2.95, r"trained artifact (checkpoint)", ha="center",
+ax.text(1.9, 3.02, r"trained artifact", ha="center",
         fontsize=7.4, color=BLUE)
+ax.text(1.9, 2.76, r"(checkpoint)", ha="center", fontsize=6.4, color=BLUE)
 ax.text(5.0, 2.95, r"operating loop: queue $\cdot$ activations",
         ha="center", fontsize=7.2, color=RED)
 ax.text(5.0, 2.69, r"(sustained by informational flux)", ha="center",
         fontsize=6.4, color=GRAY)
-ax.text(8.1, 2.95, r"uncertified backlog $\cdot$ context",
-        ha="center", fontsize=7.0, color=GREEN)
+ax.text(8.1, 3.02, r"uncertified backlog", ha="center",
+        fontsize=7.4, color=GREEN)
+ax.text(8.1, 2.76, r"(in-flight context)", ha="center", fontsize=6.4,
+        color=GREEN)
 
 # ---------------- certification lever ----------------
 ax.annotate("", xy=(2.15, 2.34), xytext=(7.85, 2.34),

@@ -12,6 +12,10 @@ PY="${PYTHON:-python}"
 OUT="$ROOT/paper_figures"
 mkdir -p "$OUT"
 
+echo "== specification_map =="
+( cd "$ROOT/derivation" && "$PY" make_specification_map.py )
+cp "$ROOT/derivation/figures/specification_map.pdf" "$OUT/"
+
 echo "== sr_simulation_validation =="
 ( cd "$ROOT/derivation" && "$PY" sr_simulation.py )
 cp "$ROOT/derivation/figures/sr_simulation_validation.pdf" "$OUT/"

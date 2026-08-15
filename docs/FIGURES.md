@@ -12,6 +12,17 @@ their output into `paper_figures/` under the paper's filenames.
 
 ## Main text
 
+### `figures/specification_map.pdf`
+The intro roadmap figure (paper Fig. 1): cell, star, and AI system split by
+the three specification classes (archive / flux / trajectory), with the
+certification lever. Pure drawing — no simulation.
+
+```bash
+python derivation/make_specification_map.py
+# writes derivation/figures/specification_map.pdf
+```
+Cost: seconds. No network.
+
 ### `figures/sr_simulation_validation.pdf`
 The α = 0 (open-loop) limit: a direct event-driven M/M/1 simulation confirms
 the closed form SR(ρ) = 1/(e^{MΔt} − 1) and the critical-slowing-down scaling

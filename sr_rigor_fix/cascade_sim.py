@@ -879,7 +879,7 @@ def cmd_nscaling(args):
     ax.set_xlabel(r"system size $N$ (parallel decoders)")
     ax.set_ylabel(r"median escape time $T_{\rm esc}$")
     ax.set_title(rf"$N$-scaling: $\alpha={alpha}$, $\theta={theta}$,"
-                 rf" $f={f}$ ({args.seeds} seeds)")
+                 rf" $\ell_0={l0:.3f}$ ({args.seeds} seeds)")
     out = os.path.join(_figdir(), "nscaling.png")
     fig.tight_layout()
     fig.savefig(out, dpi=160)
